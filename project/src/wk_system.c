@@ -25,6 +25,7 @@
 /* add user code end Header */
 
 #include "wk_system.h"
+#include <stdbool.h>
 
 #define STEP_DELAY_MS                    (uint32_t)(50)
 #define TICK_COUNT_MAX                   (uint32_t)(0xFFFFFF)
@@ -95,6 +96,46 @@ __WEAK void wk_timebase_init(void)
   TICK_COUNT_VALUE = 0UL;
   SysTick->LOAD = TICK_COUNT_MAX;
   SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
+}
+
+/**
+  * @brief  get system tick count in milliseconds.
+  * @param  none
+  * @retval tick count in milliseconds.
+  */
+__WEAK uint32_t wk_get_tick(void)
+{
+  static uint32_t last_ticks = 0;
+  static uint64_t accumulated_ticks = 0;
+  static bool initialized = false;
+  uint32_t current_ticks = TICK_COUNT_VALUE;
+  uint32_t delta_ticks = 0;
+
+  if (ticks_count_us == 0U)
+  {
+    return 0U;
+  }
+
+  if (!initialized)
+  {
+    last_ticks = current_ticks;
+    initialized = true;
+    return 0U;
+  }
+
+  if (current_ticks <= last_ticks)
+  {
+    delta_ticks = last_ticks - current_ticks;
+  }
+  else
+  {
+    delta_ticks = (TICK_COUNT_MAX - current_ticks) + last_ticks + 1U;
+  }
+
+  accumulated_ticks += delta_ticks;
+  last_ticks = current_ticks;
+
+  return (uint32_t)(accumulated_ticks / (ticks_count_us * 1000U));
 }
 
 /* support printf function, usemicrolib is unnecessary */
@@ -171,4 +212,3 @@ int __write(int fd, char *pbuffer, int size)
   return size;
 }
 #endif
-

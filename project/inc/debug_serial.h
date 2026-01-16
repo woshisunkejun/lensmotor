@@ -189,6 +189,11 @@ float bytes_to_float(const uint8_t *bytes);
  */
 uint8_t calculate_checksum(const uint8_t *data, uint16_t length);
 
+/**
+ * @brief 处理接收到的帧
+ */
+void handle_received_frames(void);
+
 #ifdef __cplusplus
 }
 #endif

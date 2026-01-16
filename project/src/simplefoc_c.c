@@ -35,6 +35,7 @@ void pid_init(pid_controller_t *pid, float kp, float ki, float kd, float limit, 
     pid->error_prev = 0.0f;
     pid->integral = 0.0f;
     pid->derivative = 0.0f;
+    pid->output_prev = 0.0f;
 }
 
 /**
@@ -70,13 +71,14 @@ float pid_compute(pid_controller_t *pid, float error, float dt)
     
     // 输出斜坡限制
     if (pid->output_ramp > 0) {
-        float output_rate = output - pid->derivative; // 之前存储的是上一次输出
-        if (output_rate > pid->output_ramp * dt) {
-            output = pid->derivative + pid->output_ramp * dt;
-        } else if (output_rate < -pid->output_ramp * dt) {
-            output = pid->derivative - pid->output_ramp * dt;
+        float output_rate = output - pid->output_prev;
+        float max_step = pid->output_ramp * dt;
+        if (output_rate > max_step) {
+            output = pid->output_prev + max_step;
+        } else if (output_rate < -max_step) {
+            output = pid->output_prev - max_step;
         }
-        pid->derivative = output; // 存储当前输出作为下次的前一输出
+        pid->output_prev = output;
     }
     
     return output;

@@ -26,6 +26,7 @@ typedef struct {
     float error_prev;   /*!< 上一次误差 */
     float integral;     /*!< 积分项 */
     float derivative;   /*!< 微分项 */
+    float output_prev;  /*!< 上一次输出 */
 } pid_controller_t;
 
 /* 低通滤波器结构体 */
