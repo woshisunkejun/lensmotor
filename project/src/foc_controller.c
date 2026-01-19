@@ -398,6 +398,7 @@ int foc_controller_loop(void)
 int foc_controller_start(uint8_t motor_index)
 {
     if(motor_index >= MAX_MOTORS) return -1;
+    drv8311_set_enable(motor_index, true);
     return foc_start(&g_motors[motor_index].motor);
 }
 
@@ -409,5 +410,7 @@ int foc_controller_start(uint8_t motor_index)
 int foc_controller_stop(uint8_t motor_index)
 {
     if(motor_index >= MAX_MOTORS) return -1;
-    return foc_stop(&g_motors[motor_index].motor);
+    int result = foc_stop(&g_motors[motor_index].motor);
+    drv8311_set_enable(motor_index, false);
+    return result;
 }
