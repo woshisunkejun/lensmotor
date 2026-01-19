@@ -228,6 +228,7 @@ void wk_nvic_config(void)
   NVIC_SetPriority(PendSV_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 0, 0));
   NVIC_SetPriority(SysTick_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 15, 0));
   nvic_irq_enable(TMR2_GLOBAL_IRQn, 0, 0);
+  nvic_irq_enable(USART1_GLOBAL_IRQn, 0, 0);
 }
 
 /* add user code begin 1 */
