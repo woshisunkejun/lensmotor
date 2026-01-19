@@ -111,24 +111,36 @@ class SerialThread(QThread):
             # 解析帧头
             frame_type = self.buffer[1]
             motor_index = self.buffer[2]
-            data_length = (self.buffer[3] << 8) | self.buffer[4]
             
-            # 检查完整帧
-            total_length = 7 + data_length
-            if len(self.buffer) < total_length:
-                return
+            # 支持大小端长度字段，优先使用大端
+            be_length = (self.buffer[3] << 8) | self.buffer[4]
+            le_length = (self.buffer[4] << 8) | self.buffer[3]
+            
+            data_length = None
+            for candidate_length in (be_length, le_length):
+                if candidate_length > 64:
+                    continue
+                total_length = 7 + candidate_length
+                if len(self.buffer) < total_length:
+                    continue
+                frame = self.buffer[:total_length]
+                checksum = self.calculate_checksum(frame[1:5 + candidate_length])
+                if checksum == frame[5 + candidate_length] and frame[-1] == FRAME_END:
+                    data_length = candidate_length
+                    break
+            
+            if data_length is None:
+                # 无法解析有效帧，丢弃当前起始字节
+                self.buffer = self.buffer[1:]
+                continue
             
             # 提取帧
+            total_length = 7 + data_length
             frame = self.buffer[:total_length]
             self.buffer = self.buffer[total_length:]
             
-            # 验证校验和
-            checksum = self.calculate_checksum(frame[1:5+data_length])
-            if checksum != frame[5+data_length] or frame[-1] != FRAME_END:
-                continue
-            
             # 解析数据
-            self.parse_frame(frame_type, motor_index, frame[5:5+data_length])
+            self.parse_frame(frame_type, motor_index, frame[5:5 + data_length])
     
     def parse_frame(self, frame_type, motor_index, data):
         """解析接收到的帧数据"""
