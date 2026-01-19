@@ -375,6 +375,7 @@ int foc_set_target(foc_motor_t *motor, float target)
     if (motor == NULL) return -1;
     
     motor->target = target;
+    motor->target_velocity = target;
     return 0;
 }
 
