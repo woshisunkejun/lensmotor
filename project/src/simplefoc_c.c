@@ -361,6 +361,9 @@ int foc_set_control_mode(foc_motor_t *motor, control_mode_e mode)
     if (motor == NULL) return -1;
     
     motor->controller = mode;
+    if (mode == FOC_CONTROL_OPENLOOP) {
+        motor->use_sensor = false;
+    }
     return 0;
 }
 
@@ -375,6 +378,7 @@ int foc_set_target(foc_motor_t *motor, float target)
     if (motor == NULL) return -1;
     
     motor->target = target;
+    motor->target_velocity = target;
     return 0;
 }
 
@@ -447,6 +451,16 @@ int foc_control_cycle(foc_motor_t *motor, float sensor_angle, float dt)
     
     motor->dt = dt;
     
+    if (motor->controller == FOC_CONTROL_OPENLOOP) {
+        float angle_step = motor->target_velocity * dt * motor->pole_pairs;
+        motor->angle_el += angle_step;
+        if (motor->angle_el > 2.0f * M_PI || motor->angle_el < -2.0f * M_PI) {
+            motor->angle_el = fmodf(motor->angle_el, 2.0f * M_PI);
+        }
+        motor->estimator.angle_prev = motor->estimator.angle;
+        motor->estimator.angle = motor->angle_el / motor->pole_pairs;
+        motor->estimator.velocity = motor->target_velocity;
+    } else {
     // 更新估算器
     motor->estimator.angle_prev = motor->estimator.angle;
     motor->estimator.angle = sensor_angle;
@@ -458,13 +472,14 @@ int foc_control_cycle(foc_motor_t *motor, float sensor_angle, float dt)
     // 计算电角度
     // 注意：这里需要根据实际电机的极对数来计算，暂时使用默认值7对极
     motor->angle_el = electrical_angle_calc(motor->estimator.angle, 7);
+    }
     
     // 根据控制模式执行相应的控制算法
     switch (motor->controller) {
         case FOC_CONTROL_OPENLOOP:
             // 开环模式：直接输出电压
-            motor->Ud = motor->target;  // 直接使用目标值作为D轴电压
-            motor->Uq = 0.0f;          // Q轴电压为0（或根据需要设置）
+            motor->Ud = 0.0f;
+            motor->Uq = motor->target;
             break;
             
         case FOC_CONTROL_CURRENT:
