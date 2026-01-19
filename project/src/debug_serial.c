@@ -17,6 +17,31 @@ static uint8_t rx_buffer[128];
 static uint16_t rx_index = 0;
 static bool frame_received = false;
 
+uint8_t calculate_checksum(const uint8_t *data, uint16_t length);
+
+/**
+ * @brief 计算帧校验和（不包含起始/结束字节）
+ * @param type 帧类型
+ * @param motor_index 电机索引
+ * @param data_length 数据长度
+ * @param data 数据指针
+ * @return 校验和
+ */
+static uint8_t calculate_frame_checksum(uint8_t type, uint8_t motor_index, uint16_t data_length, const uint8_t *data)
+{
+    uint8_t header[4];
+    header[0] = type;
+    header[1] = motor_index;
+    header[2] = (data_length >> 8) & 0xFF;
+    header[3] = data_length & 0xFF;
+
+    uint8_t checksum = calculate_checksum(header, sizeof(header));
+    if (data_length > 0 && data != NULL) {
+        checksum ^= calculate_checksum(data, data_length);
+    }
+    return checksum;
+}
+
 /**
  * @brief 初始化串口调试功能
  */
@@ -118,7 +143,7 @@ void send_motor_status(uint8_t motor_index, const motor_status_data_t *status)
     memcpy(frame.data, data_buffer, data_index);
     
     /* 计算校验和 */
-    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 4 + frame.data_length);
+    frame.checksum = calculate_frame_checksum(frame.type, frame.motor_index, frame.data_length, frame.data);
     frame.end = FRAME_END;
     
     /* 发送帧 */
@@ -170,7 +195,7 @@ void send_pid_params(uint8_t motor_index, const pid_params_data_t *params)
     memcpy(frame.data, data_buffer, data_index);
     
     /* 计算校验和 */
-    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 4 + frame.data_length);
+    frame.checksum = calculate_frame_checksum(frame.type, frame.motor_index, frame.data_length, frame.data);
     frame.end = FRAME_END;
     
     /* 发送帧 */
@@ -211,7 +236,7 @@ void send_system_status(const system_status_data_t *status)
     memcpy(frame.data, data_buffer, data_index);
     
     /* 计算校验和 */
-    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 4 + frame.data_length);
+    frame.checksum = calculate_frame_checksum(frame.type, frame.motor_index, frame.data_length, frame.data);
     frame.end = FRAME_END;
     
     /* 发送帧 */
@@ -374,9 +399,20 @@ void serial_rx_handler(void)
             /* 检查是否接收到完整帧 */
             if (rx_index >= 7) {
                 uint16_t data_length = ((uint16_t)rx_buffer[3] << 8) | rx_buffer[4];
+                if (data_length > sizeof(rx_frame.data)) {
+                    rx_index = 0;
+                    return;
+                }
+
                 if (rx_index >= (7 + data_length)) {
                     /* 帧接收完成 */
-                    memcpy(&rx_frame, rx_buffer, 7 + data_length);
+                    rx_frame.start = rx_buffer[0];
+                    rx_frame.type = rx_buffer[1];
+                    rx_frame.motor_index = rx_buffer[2];
+                    rx_frame.data_length = data_length;
+                    memcpy(rx_frame.data, &rx_buffer[5], data_length);
+                    rx_frame.checksum = rx_buffer[5 + data_length];
+                    rx_frame.end = rx_buffer[6 + data_length];
                     frame_received = true;
                     rx_index = 0;
                 }
@@ -450,7 +486,7 @@ void handle_received_frames(void)
 {
     if (frame_received) {
         /* 验证校验和 */
-        uint8_t checksum = calculate_checksum((uint8_t*)&rx_frame.type, 4 + rx_frame.data_length);
+        uint8_t checksum = calculate_frame_checksum(rx_frame.type, rx_frame.motor_index, rx_frame.data_length, rx_frame.data);
         if (checksum == rx_frame.checksum && rx_frame.end == FRAME_END) {
             /* 处理命令 */
             process_serial_command(&rx_frame);
