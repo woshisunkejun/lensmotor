@@ -118,7 +118,7 @@ void send_motor_status(uint8_t motor_index, const motor_status_data_t *status)
     memcpy(frame.data, data_buffer, data_index);
     
     /* 计算校验和 */
-    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 3 + frame.data_length);
+    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 4 + frame.data_length);
     frame.end = FRAME_END;
     
     /* 发送帧 */
@@ -170,7 +170,7 @@ void send_pid_params(uint8_t motor_index, const pid_params_data_t *params)
     memcpy(frame.data, data_buffer, data_index);
     
     /* 计算校验和 */
-    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 3 + frame.data_length);
+    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 4 + frame.data_length);
     frame.end = FRAME_END;
     
     /* 发送帧 */
@@ -211,7 +211,7 @@ void send_system_status(const system_status_data_t *status)
     memcpy(frame.data, data_buffer, data_index);
     
     /* 计算校验和 */
-    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 3 + frame.data_length);
+    frame.checksum = calculate_checksum((uint8_t*)&frame.type, 4 + frame.data_length);
     frame.end = FRAME_END;
     
     /* 发送帧 */
@@ -450,7 +450,7 @@ void handle_received_frames(void)
 {
     if (frame_received) {
         /* 验证校验和 */
-        uint8_t checksum = calculate_checksum((uint8_t*)&rx_frame.type, 3 + rx_frame.data_length);
+        uint8_t checksum = calculate_checksum((uint8_t*)&rx_frame.type, 4 + rx_frame.data_length);
         if (checksum == rx_frame.checksum && rx_frame.end == FRAME_END) {
             /* 处理命令 */
             process_serial_command(&rx_frame);
