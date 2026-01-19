@@ -211,6 +211,10 @@ void update_current_sense(uint8_t motor_index)
 int init_motor(uint8_t motor_index)
 {
     if(motor_index >= MAX_MOTORS) return -1;
+
+    if (foc_init(&g_motors[motor_index].motor) != 0) {
+        return -1;
+    }
     
     // 初始化电机对象
     g_motors[motor_index].motor.motor_type = MOTOR_TYPE_BLDC;
