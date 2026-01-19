@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
-    <fileVersion>3</fileVersion>
+    <fileVersion>4</fileVersion>
     <configuration>
         <name>AT32F423CCT7_WorkBench</name>
         <toolchain>
@@ -11,7 +11,7 @@
             <name>General</name>
             <archiveVersion>3</archiveVersion>
             <data>
-                <version>35</version>
+                <version>37</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -70,7 +70,7 @@
                 </option>
                 <option>
                     <name>OGLastSavedByProductVersion</name>
-                    <state>9.30.1.50052</state>
+                    <state>9.60.3.7274</state>
                 </option>
                 <option>
                     <name>OGChipSelectEditMenu</name>
@@ -98,7 +98,7 @@
                 </option>
                 <option>
                     <name>GBECoreSlave</name>
-                    <version>32</version>
+                    <version>34</version>
                     <state>39</state>
                 </option>
                 <option>
@@ -115,7 +115,7 @@
                 </option>
                 <option>
                     <name>CoreVariant</name>
-                    <version>32</version>
+                    <version>34</version>
                     <state>39</state>
                 </option>
                 <option>
@@ -138,7 +138,7 @@
                 </option>
                 <option>
                     <name>GFPUCoreSlave2</name>
-                    <version>32</version>
+                    <version>34</version>
                     <state>39</state>
                 </option>
                 <option>
@@ -172,11 +172,11 @@
                 </option>
                 <option>
                     <name>GenLocaleTags</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>GenLocaleDisplayOnly</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>DSPExtension</name>
@@ -211,13 +211,22 @@
                     <name>FPU64</name>
                     <state>1</state>
                 </option>
+                <option>
+                    <name>OG_32_64DeviceCoreSlave</name>
+                    <version>34</version>
+                    <state>39</state>
+                </option>
+                <option>
+                    <name>GOutputSo</name>
+                    <state>0</state>
+                </option>
             </data>
         </settings>
         <settings>
             <name>ICCARM</name>
             <archiveVersion>2</archiveVersion>
             <data>
-                <version>37</version>
+                <version>39</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -264,19 +273,19 @@
                 </option>
                 <option>
                     <name>CCDiagSuppress</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCDiagRemark</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCDiagWarning</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCDiagError</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCObjPrefix</name>
@@ -305,7 +314,7 @@
                 </option>
                 <option>
                     <name>IExtraOptions</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCLangConformance</name>
@@ -341,7 +350,7 @@
                 </option>
                 <option>
                     <name>PreInclude</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
@@ -464,13 +473,29 @@
                     <name>CCStackProtection</name>
                     <state>0</state>
                 </option>
+                <option>
+                    <name>CCPointerAutentiction</name>
+                    <state>0</state>
+                </option>
+                <option>
+                    <name>CCBranchTargetIdentification</name>
+                    <state>0</state>
+                </option>
+                <option>
+                    <name>CCPosRadRwpi</name>
+                    <state>0</state>
+                </option>
+                <option>
+                    <name>CCPosSharedSlave</name>
+                    <state>0</state>
+                </option>
             </data>
         </settings>
         <settings>
             <name>AARM</name>
             <archiveVersion>2</archiveVersion>
             <data>
-                <version>11</version>
+                <version>12</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -500,15 +525,15 @@
                 </option>
                 <option>
                     <name>AWarnOne</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>AWarnRange1</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>AWarnRange2</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>ADebug</name>
@@ -520,7 +545,7 @@
                 </option>
                 <option>
                     <name>ADefines</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>AList</name>
@@ -620,7 +645,7 @@
                 </option>
                 <option>
                     <name>AExtraOptionsV2</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>AsmNoLiteralPool</name>
@@ -628,7 +653,11 @@
                 </option>
                 <option>
                     <name>PreInclude</name>
-                    <state/>
+                    <state></state>
+                </option>
+                <option>
+                    <name>A_32_64Device</name>
+                    <state>1</state>
                 </option>
             </data>
         </settings>
@@ -664,27 +693,18 @@
         </settings>
         <settings>
             <name>CUSTOM</name>
-            <archiveVersion>3</archiveVersion>
+            <archiveVersion>4</archiveVersion>
             <data>
-                <extensions/>
-                <cmdline/>
-                <hasPrio>1</hasPrio>
+                <extensions></extensions>
+                <cmdline></cmdline>
                 <buildSequence>inputOutputBased</buildSequence>
-            </data>
-        </settings>
-        <settings>
-            <name>BUILDACTION</name>
-            <archiveVersion>1</archiveVersion>
-            <data>
-                <prebuild/>
-                <postbuild/>
             </data>
         </settings>
         <settings>
             <name>ILINK</name>
             <archiveVersion>0</archiveVersion>
             <data>
-                <version>27</version>
+                <version>28</version>
                 <wantNonLocal>1</wantNonLocal>
                 <debug>1</debug>
                 <option>
@@ -705,31 +725,31 @@
                 </option>
                 <option>
                     <name>IlinkKeepSymbols</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkRawBinaryFile</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkRawBinarySymbol</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkRawBinarySegment</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkRawBinaryAlign</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkDefines</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkConfigDefines</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkMapFile</name>
@@ -765,7 +785,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkEnableRemarks</name>
@@ -773,19 +793,19 @@
                 </option>
                 <option>
                     <name>IlinkSuppressDiags</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkTreatAsRem</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkTreatAsWarn</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkTreatAsErr</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkWarningsAreErrors</name>
@@ -797,7 +817,7 @@
                 </option>
                 <option>
                     <name>IlinkExtraOptions</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkLowLevelInterfaceSlave</name>
@@ -809,7 +829,7 @@
                 </option>
                 <option>
                     <name>IlinkAdditionalLibs</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkOverrideProgramEntryLabel</name>
@@ -944,11 +964,11 @@
                 </option>
                 <option>
                     <name>IlinkStackControlFile</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkStackCallGraphFile</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>CrcAlgorithm</name>
@@ -970,7 +990,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile_AltDefault</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkEncInput</name>
@@ -1002,19 +1022,19 @@
                 </option>
                 <option>
                     <name>IlinkRawBinaryFile2</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkRawBinarySymbol2</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkRawBinarySegment2</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkRawBinaryAlign2</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkLogCrtRoutineSelection</name>
@@ -1042,7 +1062,7 @@
                 </option>
                 <option>
                     <name>IlinkWrapperFile</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IlinkProcessor</name>
@@ -1051,6 +1071,10 @@
                 <option>
                     <name>IlinkFpuProcessor</name>
                     <state>1</state>
+                </option>
+                <option>
+                    <name>IlinkSharedSlave</name>
+                    <state>0</state>
                 </option>
             </data>
         </settings>
@@ -1063,7 +1087,7 @@
                 <debug>1</debug>
                 <option>
                     <name>IarchiveInputs</name>
-                    <state/>
+                    <state></state>
                 </option>
                 <option>
                     <name>IarchiveOverride</name>
@@ -1074,6 +1098,11 @@
                     <state>###Unitialized###</state>
                 </option>
             </data>
+        </settings>
+        <settings>
+            <name>BUILDACTION</name>
+            <archiveVersion>2</archiveVersion>
+            <data />
         </settings>
     </configuration>
     <group>
@@ -1088,37 +1117,37 @@
     <group>
         <name>firmware</name>
         <file>
-            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_crm.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_tmr.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_gpio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_usart.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_pwc.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_adc.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_dma.c</name>
+            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_crm.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_debug.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_flash.c</name>
+            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_dma.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_exint.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_flash.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_gpio.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_misc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_pwc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_tmr.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\libraries\drivers\src\at32f423_usart.c</name>
         </file>
     </group>
     <group>
@@ -1130,25 +1159,40 @@
             <name>$PROJ_DIR$\..\src\at32f423_wk_config.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\src\debug_serial.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\src\foc_controller.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\src\foc_utils.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\src\main.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\src\wk_system.c</name>
+            <name>$PROJ_DIR$\..\src\multi_foc_controller.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\src\simplefoc_c.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\src\wk_adc.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\src\wk_dma.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\src\wk_gpio.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\src\wk_system.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\src\wk_tmr.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\src\wk_usart.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\src\wk_gpio.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\src\wk_dma.c</name>
         </file>
     </group>
 </project>

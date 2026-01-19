@@ -13,7 +13,7 @@
 #include "hal_interface.h"
 #include <math.h>
 #include <string.h>
-
+#define M_PI		3.14159265358979323846
 /* 全局变量 */
 motor_control_t g_motors[MAX_MOTORS] = {0};  /*!< 多电机控制数组 */
 /**

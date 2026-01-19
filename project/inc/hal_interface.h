@@ -76,8 +76,8 @@ typedef adc_type* hal_adc_t;
 #define HAL_PWM_CHANNEL_W                       TMR_SELECT_CHANNEL_3
 
 /* GPIO定义 */
-#define HAL_DRV8311_ENABLE_PORT                 DRV8311_ENABLE_PORT
-#define HAL_DRV8311_ENABLE_PIN                  DRV8311_ENABLE_PIN
+#define HAL_DRV8311_ENABLE_PORT                 DRV8311_EN_GPIO_PORT
+#define HAL_DRV8311_ENABLE_PIN                  DRV8311_EN_PIN
 #define HAL_HALL_U_PORT                         HA_GPIO_PORT
 #define HAL_HALL_V_PORT                         HB_GPIO_PORT
 #define HAL_HALL_W_PORT                         HC_GPIO_PORT
